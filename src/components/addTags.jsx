@@ -5,7 +5,8 @@ export default function AddTag() {
   const tagsLeft = useTagStore((state) => state.tagsLeft);
   const tags = useTagStore((state) => state.tags);
   const removeTag = useTagStore((state) => state.removeTag);
-
+  const removeLastTag = useTagStore((state) => state.removeLastTag);
+  
   return (
     <div className="content">
       <p>Press enter or add a comma after each tag</p>
@@ -41,6 +42,7 @@ export default function AddTag() {
               });
               evt.target.value = "";
             }
+            if (evt.key === "Backspace") removeLastTag();
           }}
         />
       </ul>
