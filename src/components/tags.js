@@ -15,6 +15,12 @@ const setUnion = function (s1, s2) {
   return newSet;
 };
 
+const adjustValue = (val) => {
+  if (val < 0) return 0;
+  if (val > MAX_TAGS) return MAX_TAGS;
+  return val;
+};
+
 const tagStore = (setState) => ({
   tags: new Set(),
   tagsLeft: MAX_TAGS,
@@ -28,7 +34,7 @@ const tagStore = (setState) => ({
         currentState.tags instanceof Set ? currentState.tags.size : 0;
       return {
         tags: tempSet,
-        tagsLeft: currentState.tagsLeft - tempSet.size + tagSize
+        tagsLeft: adjustValue(currentState.tagsLeft - tempSet.size + tagSize)
       };
     }),
   removeTag: (tag) =>
@@ -36,14 +42,22 @@ const tagStore = (setState) => ({
       currentState.tags.delete(tag);
       return {
         tags: currentState.tags,
-        tagsLeft: currentState.tagsLeft + 1
+        tagsLeft: adjustValue(currentState.tagsLeft + 1)
       };
     }),
   removeAllTags: () =>
     setState(() => ({
       tags: new Set(),
       tagsLeft: MAX_TAGS
-    }))
+    })),
+  removeLastTag: () =>
+    setState((currentState) => {
+      currentState.tags.delete(Array.from(currentState.tags).pop());
+      return {
+        tags: currentState.tags,
+        tagsLeft: adjustValue(currentState.tagsLeft + 1)
+      };
+    })
 });
 
 const useTagStore = create(tagStore);
