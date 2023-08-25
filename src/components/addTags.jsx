@@ -6,7 +6,7 @@ export default function AddTag() {
   const tags = useTagStore((state) => state.tags);
   const removeTag = useTagStore((state) => state.removeTag);
   const removeLastTag = useTagStore((state) => state.removeLastTag);
-  
+
   return (
     <div className="content">
       <p>Press enter or add a comma after each tag</p>
@@ -25,6 +25,7 @@ export default function AddTag() {
             ))
           : null}
         <input
+          style={{ display: tagsLeft <= 0 ? "none" : "block" }}
           type="text"
           spellCheck="false"
           onFocus={(evt) =>
@@ -34,7 +35,7 @@ export default function AddTag() {
             (evt.target.parentElement.style.border = "1px solid #a6a6a6")
           }
           disabled={tagsLeft <= 0}
-          onKeyUp={(evt) => {
+          onKeyDown={(evt) => {
             if (evt.key === "Enter") {
               let tagArr = evt.target.value.split(",");
               tagArr.forEach((elm) => {
@@ -42,7 +43,8 @@ export default function AddTag() {
               });
               evt.target.value = "";
             }
-            if (evt.key === "Backspace") removeLastTag();
+            if (evt.key === "Backspace" && evt.target.value === "")
+              removeLastTag();
           }}
         />
       </ul>
