@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { devtools as devTools, persist } from "zustand/middleware";
 
 const MAX_TAGS = 10;
 
@@ -47,12 +46,5 @@ const tagStore = (setState) => ({
     }))
 });
 
-const useTagStore = create(
-  devTools(
-    persist(tagStore, {
-      name: "tags"
-    })
-  )
-);
-
+const useTagStore = create(tagStore);
 export default useTagStore;
