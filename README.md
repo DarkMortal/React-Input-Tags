@@ -1,4 +1,4 @@
 # React Input Tags using Zustand
 Created with CodeSandbox
-# Screenshots
-![Screenshot 2023-08-25 at 19-40-10 React App](https://github.com/DarkMortal/React-Input-Tags/assets/67017303/cbd504b1-19b5-410e-88d6-b155b0f1ca61)
+# Screenshot
+![Screenshot 2023-08-26 at 12-30-10 React App](https://github.com/DarkMortal/React-Input-Tags/assets/67017303/fcfb7a23-8724-4fa6-9f29-098ffcdb45f4)
